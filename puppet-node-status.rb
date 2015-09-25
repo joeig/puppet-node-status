@@ -6,11 +6,13 @@ require "json"
 require "net/http"
 require "uri"
 
+# Usage:
 def usage
   puts "USAGE"
   puts "  " + File.basename(__FILE__) + " --dashboard URL [ unresponsive failed pending changed unchanged unreported | --help ]"
 end
 
+# Node info generator:
 def node_info s, d
   nodes = JSON.parse(Net::HTTP.get(URI.parse(d + "/nodes/" + s + ".json")))
 
@@ -25,6 +27,7 @@ def node_info s, d
   end
 end
 
+# Argument parser:
 dashboard_url = ""
 status = []
 
@@ -61,6 +64,7 @@ ARGV.each_with_index do |arg, i|
   end
 end
 
+# Validations:
 if status.empty?
   status = ["unresponsive", "failed", "pending", "changed", "unchanged", "unreported"]
 else
@@ -72,6 +76,7 @@ if dashboard_url.empty?
   exit
 end
 
+# Worker:
 status.each do |s|
   node_info s, dashboard_url
 end
