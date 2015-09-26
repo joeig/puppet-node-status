@@ -1,6 +1,8 @@
 puppet-node-status
 ==================
 
+Displays a summary of the nodes' status provided by Puppet Dashboard.
+
 ```text
 USAGE
   puppet-node-status.rb --dashboard URL [ unresponsive failed pending changed unchanged unreported | --help ]
